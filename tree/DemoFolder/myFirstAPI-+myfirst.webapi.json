@@ -1,0 +1,19 @@
+{
+  "goid": "038f0e8aadefd5cb616569c43967297f",
+  "name": "myFirstAPI",
+  "resolutionPath": "/myfirst",
+  "checksum": "b1762846d6a195d74896d3180933ae410033979e",
+  "enabled": true,
+  "folderPath": "/DemoFolder",
+  "methodsAllowed": [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE"
+  ],
+  "tracingEnabled": false,
+  "wssProcessingEnabled": false,
+  "policy": {
+    "xml": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<wsp:Policy xmlns:L7p=\"http://www.layer7tech.com/ws/policy\" xmlns:wsp=\"http://schemas.xmlsoap.org/ws/2002/12/policy\">\n    <wsp:All wsp:Usage=\"Required\">\n        <wsp:OneOrMore wsp:Usage=\"Required\">\n            <wsp:All wsp:Usage=\"Required\">\n                <L7p:SslAssertion>\n                    <L7p:RequireClientAuthentication booleanValue=\"true\"/>\n                </L7p:SslAssertion>\n            </wsp:All>\n            <wsp:All wsp:Usage=\"Required\">\n                <L7p:HttpBasic/>\n                <L7p:Authentication>\n                    <L7p:IdentityProviderOid goidValue=\"0000000000000000fffffffffffffffe\"/>\n                </L7p:Authentication>\n            </wsp:All>\n        </wsp:OneOrMore>\n        <L7p:HttpRoutingAssertion>\n            <L7p:OmitAuthHeaderConnectReuseSystemDefault boxedBooleanValue=\"true\"/>\n            <L7p:ProtectedServiceUrl stringValue=\"https://gateway.brcmlabs.com/News\"/>\n            <L7p:ProxyPassword stringValueNull=\"null\"/>\n            <L7p:ProxyUsername stringValueNull=\"null\"/>\n            <L7p:RequestHeaderRules httpPassthroughRuleSet=\"included\">\n                <L7p:ForwardAll booleanValue=\"true\"/>\n                <L7p:Rules httpPassthroughRules=\"included\">\n                    <L7p:item httpPassthroughRule=\"included\">\n                        <L7p:Name stringValue=\"Cookie\"/>\n                    </L7p:item>\n                    <L7p:item httpPassthroughRule=\"included\">\n                        <L7p:Name stringValue=\"SOAPAction\"/>\n                    </L7p:item>\n                </L7p:Rules>\n            </L7p:RequestHeaderRules>\n            <L7p:RequestParamRules httpPassthroughRuleSet=\"included\">\n                <L7p:ForwardAll booleanValue=\"true\"/>\n                <L7p:Rules httpPassthroughRules=\"included\"/>\n            </L7p:RequestParamRules>\n            <L7p:ResponseHeaderRules httpPassthroughRuleSet=\"included\">\n                <L7p:ForwardAll booleanValue=\"true\"/>\n                <L7p:Rules httpPassthroughRules=\"included\">\n                    <L7p:item httpPassthroughRule=\"included\">\n                        <L7p:Name stringValue=\"Set-Cookie\"/>\n                    </L7p:item>\n                </L7p:Rules>\n            </L7p:ResponseHeaderRules>\n        </L7p:HttpRoutingAssertion>\n        <wsp:OneOrMore wsp:Usage=\"Required\">\n            <wsp:All wsp:Usage=\"Required\">\n                <L7p:ComparisonAssertion>\n                    <L7p:CaseSensitive booleanValue=\"false\"/>\n                    <L7p:Expression1 stringValue=\"${request.http.header.Content-Type}\"/>\n                    <L7p:Expression2 stringValue=\"xml\"/>\n                    <L7p:Operator operator=\"CONTAINS\"/>\n                    <L7p:Predicates predicates=\"included\">\n                        <L7p:item binary=\"included\">\n                            <L7p:CaseSensitive booleanValue=\"false\"/>\n                            <L7p:Operator operator=\"CONTAINS\"/>\n                            <L7p:RightValue stringValue=\"xml\"/>\n                        </L7p:item>\n                    </L7p:Predicates>\n                </L7p:ComparisonAssertion>\n                <L7p:JsonTransformation>\n                    <L7p:RootTagString stringValue=\"top\"/>\n                    <L7p:Transformation transformation=\"JSON_to_XML\"/>\n                </L7p:JsonTransformation>\n            </wsp:All>\n            <L7p:TrueAssertion/>\n        </wsp:OneOrMore>\n    </wsp:All>\n</wsp:Policy>\n"
+  }
+}
